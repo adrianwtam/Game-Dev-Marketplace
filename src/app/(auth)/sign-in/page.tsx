@@ -23,9 +23,17 @@ const Page = () => {
     const isSeller = searchParams.get('as') === 'seller'
     const origin = searchParams.get('origin')
 
+    const continueAsSeller = () => {
+        router.push("?as=seller")
+    }
+
+    const continueAsBuyer = () => {
+        router.replace('/sign-in', undefined)
+    }
+
     const { register, handleSubmit, formState: {errors},} = useForm<TAuthCredentialsValidator>({resolver: zodResolver(AuthCredentialsValidator)})
 
-    const {mutate, isLoading} = trpc.auth.signIn.useMutation({
+    const {mutate: signIn, isLoading} = trpc.auth.signIn.useMutation({
         onSuccess: () => {
             toast.success('Signed in successfully')
 
@@ -36,17 +44,22 @@ const Page = () => {
                 return
             }
             if(isSeller){
-                router.push('sell')
+                router.push('/sell')
                 return
             }
             // Case: Regular User gets pushed to regular home page
             router.push('/')
         },
+        onError: (err) => {
+            if(err.data?.code === 'UNAUTHORIZED') {
+                toast.error('Invalid email or password.')
+            }
+        },
     })
 
     const onSubmit = ({email, password}: TAuthCredentialsValidator) => {
         // send data to server
-        mutate({email, password})
+        signIn({email, password})
     }
 
     return (
@@ -108,6 +121,12 @@ const Page = () => {
                             </span>
                         </div>
                     </div>
+
+                    {isSeller ? (
+                        <Button onClick={}>Continue as customer</Button>
+                    ): (
+                        <Button>Continue as seller</Button>
+                    )}
                 </div>
             </div>
         </div>
