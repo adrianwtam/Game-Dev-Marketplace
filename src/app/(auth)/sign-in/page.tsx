@@ -69,7 +69,7 @@ const Page = () => {
                 <div className="flex flex-col items-center space-y-2 text-center">
                     <Icons.logo className='h-20 w-20' />
                     <h1 className="text-2xl font-bold">
-                        Sign in to your account
+                        Sign in to your {isSeller ? 'seller': ''}{' '} account
                     </h1>
 
                     <Link className={buttonVariants({variant: 'link', className:'gap-1.5'})} href='/sign-up'>
@@ -123,9 +123,9 @@ const Page = () => {
                     </div>
 
                     {isSeller ? (
-                        <Button onClick={}>Continue as customer</Button>
+                        <Button onClick={continueAsBuyer} variant='secondary' disabled={isLoading}>Continue as customer</Button>
                     ): (
-                        <Button>Continue as seller</Button>
+                        <Button onClick={continueAsSeller}>Continue as seller</Button>
                     )}
                 </div>
             </div>
