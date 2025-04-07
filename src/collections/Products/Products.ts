@@ -2,9 +2,9 @@ import { PRODUCT_CATEGORIES } from "../../config";
 import { CollectionConfig } from "payload/types";
 
 export const Products: CollectionConfig = {
-    slug: "products" ,
+    slug: 'products' ,
     admin: {
-        useAsTitle: "name"
+        useAsTitle: 'name',
     },
     access: {},
     fields: [
@@ -16,7 +16,7 @@ export const Products: CollectionConfig = {
             hasMany: false,
             admin: {
                 condition: () => false
-            }
+            },
         },
         {
             name: 'name',
@@ -26,8 +26,8 @@ export const Products: CollectionConfig = {
         },
         {
             name: "description",
-            type: "textarea",
-            label: "Product details",
+            type: 'textarea',
+            label: 'Product details',
         },
         {
             name: "price",
@@ -53,8 +53,8 @@ export const Products: CollectionConfig = {
             hasMany: false,
         },
         {
-            name: "approvedForSale",
-            label: "Product Status",
+            name: 'approvedForSale',
+            label: 'Product Status',
             type: "select",
             defaultValue: 'pending',
             access: {
