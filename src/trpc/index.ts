@@ -10,7 +10,7 @@ export const appRouter = router({
     getInfiniteProducts: publicProcedure.input(z.object({
         limit: z.number().min(1).max(100),
         cursor: z.number().nullish(),
-        query: QueryValidator
+        query: QueryValidator,
     })).query(async ({input}) => {
         const {query, cursor} = input
         const {sort, limit, ...queryOpts} = query
@@ -28,12 +28,12 @@ export const appRouter = router({
         const page = cursor || 1
 
         const {docs: items, hasNextPage, nextPage} = await payload.find({
-            collection: "products",
+            collection: 'products',
             where: {
                 approvedForSale: {
                     equals: 'approved',
                 },
-                ...parsedQueryOpts
+                ...parsedQueryOpts,
             },
             sort,
             depth: 1,
@@ -43,7 +43,7 @@ export const appRouter = router({
 
         return {
             items,
-            nextPage: hasNextPage ? nextPage : null
+            nextPage: hasNextPage ? nextPage : null,
         }
     }),
 })
