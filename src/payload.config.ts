@@ -18,7 +18,7 @@ export default buildConfig({
     serverURL: process.env.NEXT_PUBLIC_SERVER_URL || '',
     collections: [Users, Products, Media, ProductFiles, Orders],
     routes: {
-        admin: '/sell'
+        admin: '/sell',
     },
     admin: {
         user: "users",
@@ -26,7 +26,7 @@ export default buildConfig({
         meta: {
             titleSuffix: '-DigitalHippo',
             favicon: '/favicon.ico',
-            ogImage: '/thumbnail.jpg'
+            ogImage: '/thumbnail.jpg',
         },
     },
     rateLimit: {
@@ -37,6 +37,6 @@ export default buildConfig({
         url: process.env.MONGODB_URL!,
     }),
     typescript: {
-        outputFile: path.resolve(__dirname, 'payload-types.ts')
-    }
+        outputFile: path.resolve(__dirname, 'payload-types.ts'),
+    },
 })

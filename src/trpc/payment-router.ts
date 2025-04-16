@@ -1,9 +1,13 @@
 import { z } from "zod";
 import { privateProcedure, router } from "./trpc";
 import { TRPCError } from "@trpc/server";
-import { getPayloadClient } from "../get-payload";
+
 import { stripe } from "../lib/stripe";
-import Stripe from "stripe";
+import type Stripe from "stripe";
+import { getPayloadClient } from "../get-payload";
+
+
+
 
 export const paymentRouter = router({
     createSession: privateProcedure
@@ -28,7 +32,6 @@ export const paymentRouter = router({
             })
 
             const filteredProducts = products.filter((prod) => Boolean(prod.priceId))
-
             const order = await payload.create({
                 collection: "orders",
                 data: {
@@ -39,7 +42,6 @@ export const paymentRouter = router({
             })
 
             const line_items: Stripe.Checkout.SessionCreateParams.LineItem[] =[]
-
             filteredProducts.forEach((product) => {
                 line_items.push({
                     price: product.priceId!,

@@ -2,7 +2,7 @@ import { BeforeChangeHook } from "payload/dist/collections/config/types";
 import { PRODUCT_CATEGORIES } from "../../config";
 import { CollectionConfig } from "payload/types";
 import { Product } from "../../payload-types";
-import { stripe } from "@/lib/stripe";
+import { stripe } from "../../lib/stripe";
 
 const addUser: BeforeChangeHook<Product> = async ({req, data}) => {
     const user = req.user
@@ -11,7 +11,7 @@ const addUser: BeforeChangeHook<Product> = async ({req, data}) => {
 }
 
 export const Products: CollectionConfig = {
-    slug: 'products' ,
+    slug: 'products',
     admin: {
         useAsTitle: 'name',
     },
@@ -63,7 +63,7 @@ export const Products: CollectionConfig = {
             required: true,
             hasMany: false,
             admin: {
-                condition: () => false
+                condition: () => false,
             },
         },
         {
